@@ -1,0 +1,102 @@
+﻿@model IEnumerable<FarmaceutskaKuca.Models.incident>
+
+@{
+    ViewBag.Title = "Incidenti";
+}
+
+<h2>Prijavljeni incidenti</h2>
+
+<p>
+    @Html.ActionLink("Kreiraj novi", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Vrijeme prijave") <!-- DisplayNameFor(model => model.vrijemePrijave) -->
+        </th>
+        <th>
+            @Html.DisplayName("Naziv") <!-- DisplayNameFor(model => model.naziv) -->
+        </th>
+        <th>
+            @Html.DisplayName("Opis")  <!-- DisplayNameFor(model => model.opis) -->
+        </th>
+        <th>
+            @Html.DisplayName("Prioritet") <!-- DisplayNameFor(model => model.prioritet) -->
+        </th>
+        <th>
+            @Html.DisplayName("Status") <!-- DisplayNameFor(model => model.status) -->
+        </th>
+        <th>
+            @Html.DisplayName("Kategorija") <!-- DisplayNameFor(model => model.kategorija.naziv) -->
+        </th>
+        <th>
+            @Html.DisplayName("Napomena") <!-- DisplayNameFor(model => model.korisnik.username) -->
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.vrijemePrijave)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.opis)
+            </td>
+
+            @if (item.prioritet == "Visok")
+            {
+                <td class="label-danger">
+                    @Html.DisplayFor(modelItem => item.prioritet)
+                </td>
+            }
+            @if (item.prioritet == "Srednji")
+            {
+                <td class="label-warning">
+                    @Html.DisplayFor(modelItem => item.prioritet)
+                </td>
+            }
+            @if (item.prioritet == "Nizak")
+            {
+                <td class="label-success">
+                    @Html.DisplayFor(modelItem => item.prioritet)
+                </td>
+            }
+            @if (item.prioritet == "" || item.prioritet == null)
+            {
+                <td class="label-default">
+                    @Html.DisplayFor(modelItem => item.prioritet)
+                </td>
+            }
+
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.kategorija.naziv)
+            </td>
+            <!--
+            <td>
+                (at)Html.DisplayFor(modelItem => item.korisnik.username)
+            </td>
+                -->
+            <td>
+                @Html.DisplayFor(modelItem => item.Napomena_M)
+            </td>
+            <td>
+                <!-- (at)Html.ActionLink("Uredi", "Edit", new { id=item.id }) -->
+                @if (item.Napomena_M != "/" && item.Napomena_M != "" && item.Napomena_M != null)
+                {
+                    @Html.ActionLink("Potvrdi/Odbij", "EditK", new { id = item.id })
+                }
+                @Html.ActionLink("Detalji", "Details", new { id = item.id })
+                <!-- (at)Html.ActionLink("Izbriši", "Delete", new { id=item.id }) -->
+            </td>
+        </tr>
+    }
+
+</table>

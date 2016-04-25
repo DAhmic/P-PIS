@@ -1,0 +1,75 @@
+﻿@model IEnumerable<FarmaceutskaKuca.Models.baza_znanja>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Baza znanja</h2>
+
+<p>
+    @Html.ActionLink("Kreiraj novi unos", "Create")
+
+    @using (Html.BeginForm("Index", "Baza_znanja", FormMethod.Get))
+    {
+    <p>
+        Kategorija: @Html.DropDownList("category", "")
+        Naziv: @Html.TextBox("SearchString") 
+        <input type="submit" value="Traži" />
+    </p>
+    }
+
+</p>
+
+@if (Model.Count() == 0)
+{
+    <br />
+    <br />
+    <div class="text-center">
+        <div class="text-primary">
+            <p class="lead">Nema rezultata</p>
+        </div>
+    </div>
+    <div>
+
+
+    </div>
+}
+else {
+    <br />
+    <br />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Naziv incidenta")
+            </th>
+            <th>
+                @Html.DisplayName("Rješenje")
+            </th>
+            <th>
+                @Html.DisplayName("Kategorija")
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.naziv_incidenta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rjesenje)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.kategorija.naziv)
+            </td>
+            <td>
+                @Html.ActionLink("Uredi", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Detalji", "Details", new { id = item.id }) |
+                @Html.ActionLink("Izbriši", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+    </table>
+}

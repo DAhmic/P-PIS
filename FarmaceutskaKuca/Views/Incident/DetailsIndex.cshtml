@@ -1,0 +1,98 @@
+﻿@model FarmaceutskaKuca.Models.incident
+
+@{
+    ViewBag.Title = "Detalji";
+}
+
+<h2>Detalji</h2>
+
+<div>
+    <!-- <h4>incident</h4> -->
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Vrijeme prijave: ") <!-- DisplayNameFor(model => model.vrijemePrijave) -->
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vrijemePrijave)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Naziv: ") <!-- DisplayNameFor(model => model.naziv) -->
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.naziv)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Opis: ") <!-- (model => model.opis) -->
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.opis)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Prioritet: ") <!-- DisplayNameFor(model => model.prioritet) -->
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prioritet)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Status: ") <!-- DisplayNameFor(model => model.status) -->
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Kategorija: ") <!-- DisplayNameFor(model => model.kategorija.naziv) -->
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kategorija.naziv)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Korisnik: ") <!-- DisplayNameFor(model => model.korisnik.username) -->
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.korisnik.username)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Napomena: ") <!-- DisplayNameFor(model => model.Napomena_M) -->
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Napomena_M)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Korisnik potvrdio: ") <!-- DisplayNameFor(model => model.Napomena_K) -->
+        </dt>
+
+        <dd>
+            @if (Model.Napomena_K == "Prihvaceno")
+            {
+                @Html.DisplayName("Da")
+            }
+            @if (Model.Napomena_K == "Odbijeno")
+            {
+                @Html.DisplayName("Ne")
+            }
+            <!--(at)Html.DisplayFor(model => model.Napomena_K) -->
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <!--(at)Html.ActionLink("Potvrdi/Odbij", "EditK", new { id = Model.id })-->
+    @Html.ActionLink("Nazad", "Index")
+</p>

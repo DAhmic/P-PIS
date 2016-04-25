@@ -1,0 +1,50 @@
+﻿@model FarmaceutskaKuca.Models.edukacija
+
+@{
+    ViewBag.Title = "Detalji";
+}
+
+<h2>Detalji</h2>
+
+<div>
+    <h4>Edukacija</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Naziv")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.naziv)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Opis")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.opis)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Kategorija")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kategorija)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Trajanje")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trajanje)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Uredi", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Nazad", "Index")
+</p>

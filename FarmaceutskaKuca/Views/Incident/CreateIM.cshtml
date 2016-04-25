@@ -1,0 +1,107 @@
+﻿@model FarmaceutskaKuca.Models.incident
+
+@{
+    ViewBag.Title = "Kreiraj";
+}
+
+<h2>Kreiraj</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Incident</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <!-- ovo ne radi -->
+        <!-- <div class="form-group"> -->
+        <!-- (at)Html.Label("Vrijeme prijave", htmlAttributes: new { (at)class = "control-label col-md-2" }) -->
+        <!--LabelFor(model => model.vrijemePrijave, htmlAttributes: new { (monkey)class = "control-label col-md-2" }) -->
+        <!-- <div class="col-md-10"> -->
+        <!-- (at){ Model.vrijemePrijave = new DateTime(); } -->
+        <!-- (at)Html.EditorFor(model => model.vrijemePrijave, new { htmlAttributes = new { (at)class = "form-control" } }) -->
+        <!-- (at)Html.ValidationMessageFor(model => model.vrijemePrijave, "", new { (at)class = "text-danger" }) -->
+        <!-- </div> -->
+        <!-- </div> -->
+
+
+        @Html.HiddenFor(model => model.id)
+        @Html.HiddenFor(model => model.vrijemePrijave)
+
+
+        <div class="form-group">
+            @Html.Label("Naziv", htmlAttributes: new { @class = "control-label col-md-2" })
+            <!-- LabelFor(model => model.naziv, htmlAttributes: new { (monkey)class = "control-label col-md-2" }) -->
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.naziv, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.naziv, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Opis", htmlAttributes: new { @class = "control-label col-md-2" })
+            <!-- LabelFor(model => model.opis, htmlAttributes: new { (monkey)class = "control-label col-md-2" }) -->
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.opis, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.opis, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Kategorija_id, "Kategorija", htmlAttributes: new { @class = "control-label col-md-2" })
+            <!-- LabelFor(model => model.Kategorija_id, "Kategorija_id", htmlAttributes: new { (monkey)class = "control-label col-md-2" }) -->
+            <div class="col-md-10">
+                @Html.DropDownList("Kategorija_id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Kategorija_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Prioritet", htmlAttributes: new { @class = "control-label col-md-2" })
+            <!-- LabelFor(model => model.prioritet, htmlAttributes: new { (monkey)class = "control-label col-md-2" }) -->
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.prioritet, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.prioritet, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Status", htmlAttributes: new { @class = "control-label col-md-2" })
+            <!-- LabelFor(model => model.status, htmlAttributes: new { (monkey)class = "control-label col-md-2" }) -->
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.status, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.Korisnik_id)
+        <!-- <div class="form-group"> -->
+        <!-- (at)Html.LabelFor(model => model.Korisnik_id, "Korisnik", htmlAttributes: new { (at)class = "control-label col-md-2" }) -->
+        <!-- LabelFor(model => model.Korisnik_id, "Korisnik_id", htmlAttributes: new { (monkey)class = "control-label col-md-2" }) -->
+        <!-- <div class="col-md-10"> -->
+        <!-- (at)Html.DropDownList("Korisnik_id", null, htmlAttributes: new { (at)class = "form-control" }) -->
+        <!-- (at)Html.ValidationMessageFor(model => model.Korisnik_id, "", new { (at)class = "text-danger" }) -->
+        <!-- </div> -->
+        <!-- </div> -->
+
+        @Html.HiddenFor(model => model.Napomena_M)
+        @Html.HiddenFor(model => model.Napomena_K)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Dodaj" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Nazad", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
