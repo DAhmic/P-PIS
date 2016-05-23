@@ -14,6 +14,15 @@
           <Property Name="rjesenje" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="id_k" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="dostupnost">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_s" Type="int" Nullable="false" />
+          <Property Name="id_m" Type="int" Nullable="false" />
+          <Property Name="procenat" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="edukacija">
           <Key>
             <PropertyRef Name="id" />
@@ -66,6 +75,51 @@
           <Property Name="id_e" Type="int" />
           <Property Name="odobreno" Type="int" />
         </EntityType>
+        <EntityType Name="mjesec">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naziv" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="plan">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_sxr" Type="int" Nullable="false" />
+          <Property Name="preventivne_strategije" Type="varchar" MaxLength="500" />
+          <Property Name="strategije_odgovora" Type="varchar" MaxLength="500" />
+          <Property Name="strategije_oporavka" Type="varchar" MaxLength="500" />
+          <Property Name="testiran" Type="varchar" MaxLength="10" />
+          <Property Name="napomena_k" Type="varchar" MaxLength="50" />
+          <Property Name="napomena_m" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="rizik">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naziv" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="servis">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naziv" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RTO_RPO" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="servisxrizik">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_s" Type="int" Nullable="false" />
+          <Property Name="id_r" Type="int" Nullable="false" />
+          <Property Name="procenat" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="naziv" Type="varchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="tip">
           <Key>
             <PropertyRef Name="id" />
@@ -82,6 +136,30 @@
             </Principal>
             <Dependent Role="baza_znanja">
               <PropertyRef Name="id_k" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="dostupnost_ibfk_1">
+          <End Role="servis" Type="Self.servis" Multiplicity="1" />
+          <End Role="dostupnost" Type="Self.dostupnost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="servis">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dostupnost">
+              <PropertyRef Name="id_s" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="dostupnost_ibfk_2">
+          <End Role="mjesec" Type="Self.mjesec" Multiplicity="1" />
+          <End Role="dostupnost" Type="Self.dostupnost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mjesec">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dostupnost">
+              <PropertyRef Name="id_m" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -145,17 +223,67 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="plan_ibfk_1">
+          <End Role="servisxrizik" Type="Self.servisxrizik" Multiplicity="1" />
+          <End Role="plan" Type="Self.plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="servisxrizik">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="plan">
+              <PropertyRef Name="id_sxr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="servisxrizik_ibfk_1">
+          <End Role="servis" Type="Self.servis" Multiplicity="1" />
+          <End Role="servisxrizik" Type="Self.servisxrizik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="servis">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="servisxrizik">
+              <PropertyRef Name="id_s" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="servisxrizik_ibfk_2">
+          <End Role="rizik" Type="Self.rizik" Multiplicity="1" />
+          <End Role="servisxrizik" Type="Self.servisxrizik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rizik">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="servisxrizik">
+              <PropertyRef Name="id_r" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="mydbModelStoreContainer">
           <EntitySet Name="baza_znanja" EntityType="Self.baza_znanja" Schema="mydb" store:Type="Tables" />
+          <EntitySet Name="dostupnost" EntityType="Self.dostupnost" Schema="mydb" store:Type="Tables" />
           <EntitySet Name="edukacija" EntityType="Self.edukacija" Schema="mydb" store:Type="Tables" />
           <EntitySet Name="incident" EntityType="Self.incident" Schema="mydb" store:Type="Tables" />
           <EntitySet Name="kategorija" EntityType="Self.kategorija" Schema="mydb" store:Type="Tables" />
           <EntitySet Name="korisnik" EntityType="Self.korisnik" Schema="mydb" store:Type="Tables" />
           <EntitySet Name="korisnikxedukacija" EntityType="Self.korisnikxedukacija" Schema="mydb" store:Type="Tables" />
+          <EntitySet Name="mjesec" EntityType="Self.mjesec" Schema="mydb" store:Type="Tables" />
+          <EntitySet Name="plan" EntityType="Self.plan" Schema="mydb" store:Type="Tables" />
+          <EntitySet Name="rizik" EntityType="Self.rizik" Schema="mydb" store:Type="Tables" />
+          <EntitySet Name="servis" EntityType="Self.servis" Schema="mydb" store:Type="Tables" />
+          <EntitySet Name="servisxrizik" EntityType="Self.servisxrizik" Schema="mydb" store:Type="Tables" />
           <EntitySet Name="tip" EntityType="Self.tip" Schema="mydb" store:Type="Tables" />
           <AssociationSet Name="baza_znanja_ibfk_1" Association="Self.baza_znanja_ibfk_1">
             <End Role="kategorija" EntitySet="kategorija" />
             <End Role="baza_znanja" EntitySet="baza_znanja" />
+          </AssociationSet>
+          <AssociationSet Name="dostupnost_ibfk_1" Association="Self.dostupnost_ibfk_1">
+            <End Role="servis" EntitySet="servis" />
+            <End Role="dostupnost" EntitySet="dostupnost" />
+          </AssociationSet>
+          <AssociationSet Name="dostupnost_ibfk_2" Association="Self.dostupnost_ibfk_2">
+            <End Role="mjesec" EntitySet="mjesec" />
+            <End Role="dostupnost" EntitySet="dostupnost" />
           </AssociationSet>
           <AssociationSet Name="fk_Incident_Kategorija1" Association="Self.fk_Incident_Kategorija1">
             <End Role="kategorija" EntitySet="kategorija" />
@@ -176,6 +304,18 @@
           <AssociationSet Name="id_k" Association="Self.id_k">
             <End Role="korisnik" EntitySet="korisnik" />
             <End Role="korisnikxedukacija" EntitySet="korisnikxedukacija" />
+          </AssociationSet>
+          <AssociationSet Name="plan_ibfk_1" Association="Self.plan_ibfk_1">
+            <End Role="servisxrizik" EntitySet="servisxrizik" />
+            <End Role="plan" EntitySet="plan" />
+          </AssociationSet>
+          <AssociationSet Name="servisxrizik_ibfk_1" Association="Self.servisxrizik_ibfk_1">
+            <End Role="servis" EntitySet="servis" />
+            <End Role="servisxrizik" EntitySet="servisxrizik" />
+          </AssociationSet>
+          <AssociationSet Name="servisxrizik_ibfk_2" Association="Self.servisxrizik_ibfk_2">
+            <End Role="rizik" EntitySet="rizik" />
+            <End Role="servisxrizik" EntitySet="servisxrizik" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -298,7 +438,33 @@
             <End Role="kategorija" EntitySet="kategorija" />
             <End Role="baza_znanja" EntitySet="baza_znanja" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="plan" EntityType="mydbModel.plan" />
+          <EntitySet Name="rizik" EntityType="mydbModel.rizik" />
+          <EntitySet Name="servis" EntityType="mydbModel.servis" />
+          <EntitySet Name="servisxrizik" EntityType="mydbModel.servisxrizik" />
+          <AssociationSet Name="plan_ibfk_1" Association="mydbModel.plan_ibfk_1">
+            <End Role="servisxrizik" EntitySet="servisxrizik" />
+            <End Role="plan" EntitySet="plan" />
+          </AssociationSet>
+          <AssociationSet Name="servisxrizik_ibfk_2" Association="mydbModel.servisxrizik_ibfk_2">
+            <End Role="rizik" EntitySet="rizik" />
+            <End Role="servisxrizik" EntitySet="servisxrizik" />
+          </AssociationSet>
+          <AssociationSet Name="servisxrizik_ibfk_1" Association="mydbModel.servisxrizik_ibfk_1">
+            <End Role="servis" EntitySet="servis" />
+            <End Role="servisxrizik" EntitySet="servisxrizik" />
+          </AssociationSet>
+          <EntitySet Name="mjesec" EntityType="mydbModel.mjesec" />
+          <EntitySet Name="dostupnost" EntityType="mydbModel.dostupnost" />
+          <AssociationSet Name="dostupnost_ibfk_1" Association="mydbModel.dostupnost_ibfk_1">
+            <End Role="servis" EntitySet="servis" />
+            <End Role="dostupnost" EntitySet="dostupnost" />
+          </AssociationSet>
+          <AssociationSet Name="dostupnost_ibfk_2" Association="mydbModel.dostupnost_ibfk_2">
+            <End Role="mjesec" EntitySet="mjesec" />
+            <End Role="dostupnost" EntitySet="dostupnost" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="edukacija">
           <Key>
             <PropertyRef Name="id" />
@@ -367,7 +533,131 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="plan">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_sxr" Type="Int32" Nullable="false" />
+          <Property Name="preventivne_strategije" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="strategije_odgovora" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="strategije_oporavka" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="testiran" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="napomena_k" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="napomena_m" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="servisxrizik" Relationship="mydbModel.plan_ibfk_1" FromRole="plan" ToRole="servisxrizik" />
+        </EntityType>
+        <EntityType Name="rizik">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naziv" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="servisxrizik" Relationship="mydbModel.servisxrizik_ibfk_2" FromRole="rizik" ToRole="servisxrizik" />
+        </EntityType>
+        <EntityType Name="servis">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naziv" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RTO_RPO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="servisxrizik" Relationship="mydbModel.servisxrizik_ibfk_1" FromRole="servis" ToRole="servisxrizik" />
+          <NavigationProperty Name="dostupnost" Relationship="mydbModel.dostupnost_ibfk_1" FromRole="servis" ToRole="dostupnost" />
+        </EntityType>
+        <EntityType Name="servisxrizik">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_s" Type="Int32" Nullable="false" />
+          <Property Name="id_r" Type="Int32" Nullable="false" />
+          <Property Name="procenat" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="plan" Relationship="mydbModel.plan_ibfk_1" FromRole="servisxrizik" ToRole="plan" />
+          <NavigationProperty Name="rizik" Relationship="mydbModel.servisxrizik_ibfk_2" FromRole="servisxrizik" ToRole="rizik" />
+          <NavigationProperty Name="servis" Relationship="mydbModel.servisxrizik_ibfk_1" FromRole="servisxrizik" ToRole="servis" />
+          <Property Name="naziv" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="plan_ibfk_1">
+          <End Type="mydbModel.servisxrizik" Role="servisxrizik" Multiplicity="1" />
+          <End Type="mydbModel.plan" Role="plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="servisxrizik">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="plan">
+              <PropertyRef Name="id_sxr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="servisxrizik_ibfk_2">
+          <End Type="mydbModel.rizik" Role="rizik" Multiplicity="1" />
+          <End Type="mydbModel.servisxrizik" Role="servisxrizik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rizik">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="servisxrizik">
+              <PropertyRef Name="id_r" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="servisxrizik_ibfk_1">
+          <End Type="mydbModel.servis" Role="servis" Multiplicity="1" />
+          <End Type="mydbModel.servisxrizik" Role="servisxrizik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="servis">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="servisxrizik">
+              <PropertyRef Name="id_s" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="mjesec">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naziv" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="dostupnost" Relationship="mydbModel.dostupnost_ibfk_2" FromRole="mjesec" ToRole="dostupnost" />
+        </EntityType>
+        <EntityType Name="dostupnost">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_s" Type="Int32" Nullable="false" />
+          <Property Name="id_m" Type="Int32" Nullable="false" />
+          <Property Name="procenat" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="servis" Relationship="mydbModel.dostupnost_ibfk_1" FromRole="dostupnost" ToRole="servis" />
+          <NavigationProperty Name="mjesec" Relationship="mydbModel.dostupnost_ibfk_2" FromRole="dostupnost" ToRole="mjesec" />
+        </EntityType>
+        <Association Name="dostupnost_ibfk_1">
+          <End Type="mydbModel.servis" Role="servis" Multiplicity="1" />
+          <End Type="mydbModel.dostupnost" Role="dostupnost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="servis">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dostupnost">
+              <PropertyRef Name="id_s" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="dostupnost_ibfk_2">
+          <End Type="mydbModel.mjesec" Role="mjesec" Multiplicity="1" />
+          <End Type="mydbModel.dostupnost" Role="dostupnost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mjesec">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="dostupnost">
+              <PropertyRef Name="id_m" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -444,6 +734,66 @@
                 <ScalarProperty Name="id_k" ColumnName="id_k" />
                 <ScalarProperty Name="rjesenje" ColumnName="rjesenje" />
                 <ScalarProperty Name="naziv_incidenta" ColumnName="naziv_incidenta" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="plan">
+            <EntityTypeMapping TypeName="mydbModel.plan">
+              <MappingFragment StoreEntitySet="plan">
+                <ScalarProperty Name="napomena_m" ColumnName="napomena_m" />
+                <ScalarProperty Name="napomena_k" ColumnName="napomena_k" />
+                <ScalarProperty Name="testiran" ColumnName="testiran" />
+                <ScalarProperty Name="strategije_oporavka" ColumnName="strategije_oporavka" />
+                <ScalarProperty Name="strategije_odgovora" ColumnName="strategije_odgovora" />
+                <ScalarProperty Name="preventivne_strategije" ColumnName="preventivne_strategije" />
+                <ScalarProperty Name="id_sxr" ColumnName="id_sxr" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rizik">
+            <EntityTypeMapping TypeName="mydbModel.rizik">
+              <MappingFragment StoreEntitySet="rizik">
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="servis">
+            <EntityTypeMapping TypeName="mydbModel.servis">
+              <MappingFragment StoreEntitySet="servis">
+                <ScalarProperty Name="RTO_RPO" ColumnName="RTO_RPO" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="servisxrizik">
+            <EntityTypeMapping TypeName="mydbModel.servisxrizik">
+              <MappingFragment StoreEntitySet="servisxrizik">
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="procenat" ColumnName="procenat" />
+                <ScalarProperty Name="id_r" ColumnName="id_r" />
+                <ScalarProperty Name="id_s" ColumnName="id_s" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mjesec">
+            <EntityTypeMapping TypeName="mydbModel.mjesec">
+              <MappingFragment StoreEntitySet="mjesec">
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dostupnost">
+            <EntityTypeMapping TypeName="mydbModel.dostupnost">
+              <MappingFragment StoreEntitySet="dostupnost">
+                <ScalarProperty Name="procenat" ColumnName="procenat" />
+                <ScalarProperty Name="id_m" ColumnName="id_m" />
+                <ScalarProperty Name="id_s" ColumnName="id_s" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

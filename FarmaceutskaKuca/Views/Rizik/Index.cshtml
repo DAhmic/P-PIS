@@ -1,0 +1,33 @@
+﻿@model IEnumerable<FarmaceutskaKuca.Models.rizik>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Rizici</h2>
+
+<p>
+    @Html.ActionLink("Kreiraj novi", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Naziv")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.naziv)
+        </td>
+        <td>
+            @Html.ActionLink("Uredi", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Detalji", "Details", new { id=item.id }) |
+            @Html.ActionLink("Izbriši", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

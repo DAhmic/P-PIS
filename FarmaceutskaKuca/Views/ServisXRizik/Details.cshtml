@@ -1,0 +1,50 @@
+﻿@model FarmaceutskaKuca.Models.servisxrizik
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalji</h2>
+
+<div>
+    <!--<h4>servisxrizik</h4> -->
+    <hr />
+    <dl class="dl-horizontal">
+        <!-- <dt>
+        Html.DisplayName("Naziv")
+    </dt>
+
+    <dd>
+        Html.DisplayFor(model => model.naziv)
+    </dd> -->
+
+        <dt>
+            @Html.DisplayName("Servis")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.servis.naziv)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Rizik")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rizik.naziv)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Procenat")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.procenat)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Uredi", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Nazad", "Index")
+</p>

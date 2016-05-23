@@ -124,19 +124,34 @@ namespace FarmaceutskaKuca.Controllers
                     Session["KorisnikIme"] = user.ime;
 
                     if (user.tip.naziv == "admin")
+                    {
                         Session["admin"] = "admin";
+                        return RedirectToAction("Index", "Home");
+                    }
 
                     if (user.tip.naziv == "incidentM")
+                    {
                         Session["incidentM"] = "incidentM";
+                        return RedirectToAction("IndexIM", "Home");
+                    }
 
                     if (user.tip.naziv == "knowledgeM")
+                    {
                         Session["knowledgeM"] = "knowledgeM";
+                        return RedirectToAction("IndexKM", "Home");
+                    }
 
                     if (user.tip.naziv == "continuityM")
+                    {
                         Session["continuityM"] = "continuityM";
+                        return RedirectToAction("IndexITSCM", "Home");
+                    }
 
                     if (user.tip.naziv == "korisnik")
+                    {
                         Session["korisnik"] = "korisnik";
+                        return RedirectToAction("Index", "Home");
+                    }
 
                     Session["TipKorisnika"] = user.tip.naziv;
 
@@ -146,14 +161,15 @@ namespace FarmaceutskaKuca.Controllers
                 else
                 {
                     ModelState.AddModelError("", "Pogrešan username ili password");
-                    return View(k);
+                    //return View(k);
                 }
             }
+            return View(k);
         }
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
+        [HttpGet]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
@@ -554,7 +570,7 @@ namespace FarmaceutskaKuca.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("LogOff", "Account");  //return RedirectToAction("Index", "Home"); 
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

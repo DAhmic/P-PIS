@@ -32,5 +32,11 @@ namespace FarmaceutskaKuca.Models
         public virtual DbSet<edukacija> edukacija { get; set; }
         public virtual DbSet<korisnikxedukacija> korisnikxedukacija { get; set; }
         public virtual DbSet<baza_znanja> baza_znanja { get; set; }
+        public virtual DbSet<plan> plan { get; set; }
+        public virtual DbSet<rizik> rizik { get; set; }
+        public virtual DbSet<servis> servis { get; set; }
+        public virtual DbSet<servisxrizik> servisxrizik { get; set; }
+        public virtual DbSet<mjesec> mjesec { get; set; }
+        public virtual DbSet<dostupnost> dostupnost { get; set; }
     }
 }

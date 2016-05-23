@@ -1,0 +1,72 @@
+﻿@model IEnumerable<FarmaceutskaKuca.Models.plan>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Plan oporavka</h2>
+
+<p>
+    @Html.ActionLink("Kreiraj novi", "CreateK")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Servis i rizik")
+        </th>
+        <th>
+            @Html.DisplayName("Preventivne strategije")
+        </th>
+        <th>
+            @Html.DisplayName("Strategije odgovora")
+        </th>
+        <th>
+            @Html.DisplayName("Strategije oporavka")
+        </th>
+        <th>
+            @Html.DisplayName("Testiran")
+        </th>
+        <th>
+            @Html.DisplayName("Napomena")
+        </th>
+        <th>
+            @Html.DisplayName("Odobren")
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.servisxrizik.naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.preventivne_strategije)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.strategije_odgovora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.strategije_oporavka)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.testiran)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.napomena_k)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.napomena_m)
+            </td>
+
+            <td>
+                @Html.ActionLink("Uredi", "EditK", new { id = item.id }) |
+                @Html.ActionLink("Detalji", "DetailsK", new { id = item.id }) |
+                @Html.ActionLink("Izbriši", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>

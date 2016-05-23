@@ -1,0 +1,74 @@
+﻿@model FarmaceutskaKuca.Models.plan
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalji</h2>
+
+<div>
+    <h4>Plan oporavka</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Procenat")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.servisxrizik.naziv)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Preventivne strategije")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.preventivne_strategije)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Strategije odgovora")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.strategije_odgovora)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Strategije oporavka")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.strategije_oporavka)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Testiran")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.testiran)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Napomena")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.napomena_k)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Odobreno")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.napomena_m)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Uredi", "EditK", new { id = Model.id }) |
+    @Html.ActionLink("Nazad", "IndexK")
+</p>

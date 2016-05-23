@@ -207,6 +207,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DostupnostController.cs" />
+    <Compile Include="Controllers\MjesecController.cs" />
+    <Compile Include="Controllers\PlanController.cs" />
+    <Compile Include="Controllers\RizikController.cs" />
+    <Compile Include="Controllers\ServisController.cs" />
+    <Compile Include="Controllers\ServisXRizikController.cs" />
+    <Compile Include="Models\dostupnost.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\mjesec.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\plan.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\rizik.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\servis.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\servisxrizik.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\App_Start\BundleConfig.cs" />
     <Compile Include="Properties\App_Start\FilterConfig.cs" />
     <Compile Include="Properties\App_Start\IdentityConfig.cs" />
@@ -379,6 +403,45 @@
     <Content Include="Views\Baza_znanja\Index.cshtml" />
     <Content Include="Views\Edukacija\IndexK.cshtml" />
     <Content Include="Views\Edukacija\Prijava.cshtml" />
+    <Content Include="Views\Servis\Create.cshtml" />
+    <Content Include="Views\Servis\Delete.cshtml" />
+    <Content Include="Views\Servis\Details.cshtml" />
+    <Content Include="Views\Servis\Edit.cshtml" />
+    <Content Include="Views\Servis\Index.cshtml" />
+    <Content Include="Views\Rizik\Create.cshtml" />
+    <Content Include="Views\Rizik\Delete.cshtml" />
+    <Content Include="Views\Rizik\Details.cshtml" />
+    <Content Include="Views\Rizik\Edit.cshtml" />
+    <Content Include="Views\Rizik\Index.cshtml" />
+    <Content Include="Views\Plan\Create.cshtml" />
+    <Content Include="Views\Plan\Delete.cshtml" />
+    <Content Include="Views\Plan\Details.cshtml" />
+    <Content Include="Views\Plan\Edit.cshtml" />
+    <Content Include="Views\Plan\Index.cshtml" />
+    <Content Include="Views\ServisXRizik\Create.cshtml" />
+    <Content Include="Views\ServisXRizik\Delete.cshtml" />
+    <Content Include="Views\ServisXRizik\Details.cshtml" />
+    <Content Include="Views\ServisXRizik\Edit.cshtml" />
+    <Content Include="Views\ServisXRizik\Index.cshtml" />
+    <Content Include="Views\Mjesec\Create.cshtml" />
+    <Content Include="Views\Mjesec\Delete.cshtml" />
+    <Content Include="Views\Mjesec\Details.cshtml" />
+    <Content Include="Views\Mjesec\Edit.cshtml" />
+    <Content Include="Views\Mjesec\Index.cshtml" />
+    <Content Include="Views\Dostupnost\Create.cshtml" />
+    <Content Include="Views\Dostupnost\Delete.cshtml" />
+    <Content Include="Views\Dostupnost\Details.cshtml" />
+    <Content Include="Views\Dostupnost\Edit.cshtml" />
+    <Content Include="Views\Dostupnost\Index.cshtml" />
+    <Content Include="Views\Dostupnost\Chart.cshtml" />
+    <Content Include="Views\Plan\IndexK.cshtml" />
+    <Content Include="Views\Plan\CreateK.cshtml" />
+    <Content Include="Views\Plan\EditK.cshtml" />
+    <Content Include="Views\Plan\DetailsK.cshtml" />
+    <Content Include="Views\Home\IndexIM.cshtml" />
+    <Content Include="Views\Home\IndexKM.cshtml" />
+    <Content Include="Views\Home\IndexITSCM.cshtml" />
+    <Content Include="Views\Account\LogOff.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

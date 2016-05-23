@@ -1,0 +1,30 @@
+﻿@model FarmaceutskaKuca.Models.dostupnost
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalji</h2>
+
+<div>
+    <h4>Dostupnost</h4>
+
+    @{
+
+        var myChart = new Chart(width: 1000,
+        height: 500,
+        theme: ChartTheme.Green)
+        .AddTitle("Mjesecna dostupnost servisa")
+        .AddSeries(
+        name: "Servis",
+        xValue: new[] { "Januar", "Februar", "Mart", "April", "Maj", "Juni", "Juli", "August", "Septembar", "Oktobar", "Novembar", "Decembar"},
+        yValues: new[] { "92", "95", "100", "99", "98", "100", "98", "97", "95", "93", "97", "94" })
+        .Write();
+    }
+
+    <hr />
+
+</div>
+<p>
+    @Html.ActionLink("Nazad", "Index")
+</p>

@@ -18,7 +18,18 @@
         <AssociationConnector Association="mydbModel.id_k" />
         <EntityTypeShape EntityType="mydbModel.baza_znanja" Width="1.5" PointX="5.25" PointY="8.5" />
         <AssociationConnector Association="mydbModel.baza_znanja_ibfk_1" />
-      </Diagram>
+        <EntityTypeShape EntityType="mydbModel.plan" Width="1.5" PointX="12.875" PointY="5" />
+        <EntityTypeShape EntityType="mydbModel.rizik" Width="1.5" PointX="8.375" PointY="5.5" />
+        <EntityTypeShape EntityType="mydbModel.servis" Width="1.5" PointX="8.375" PointY="8.5" />
+        <EntityTypeShape EntityType="mydbModel.servisxrizik" Width="1.5" PointX="10.625" PointY="5.125" />
+        <AssociationConnector Association="mydbModel.plan_ibfk_1" />
+        <AssociationConnector Association="mydbModel.servisxrizik_ibfk_2" />
+        <AssociationConnector Association="mydbModel.servisxrizik_ibfk_1" />
+        <EntityTypeShape EntityType="mydbModel.mjesec" Width="1.5" PointX="8.375" PointY="11.75" />
+        <EntityTypeShape EntityType="mydbModel.dostupnost" Width="1.5" PointX="10.625" PointY="9.875" />
+        <AssociationConnector Association="mydbModel.dostupnost_ibfk_1" />
+        <AssociationConnector Association="mydbModel.dostupnost_ibfk_2" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

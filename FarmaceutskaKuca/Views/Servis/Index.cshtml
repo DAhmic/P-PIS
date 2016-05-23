@@ -1,0 +1,39 @@
+﻿@model IEnumerable<FarmaceutskaKuca.Models.servis>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Servisi</h2>
+
+<p>
+    @Html.ActionLink("Kreiraj novi", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Naziv")
+        </th>
+        <th>
+            @Html.DisplayName("RTO/RPO")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.naziv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RTO_RPO)
+        </td>
+        <td>
+            @Html.ActionLink("Uredi", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Detalji", "Details", new { id=item.id }) |
+            @Html.ActionLink("Izbriši", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
