@@ -48,11 +48,11 @@ namespace FarmaceutskaKuca.Models
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Username je obavezan")]
         [Display(Name = "Username")]
         public string Username { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Password je obavezan")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
 
-@if (Session["KorisnikId"] as string == null || Session["KorisnikIme"] as string == null || Session["KorisnikId"] as string == "" || Session["KorisnikIme"] as string == "")
+@if (Session["KorisnikId"] as string == null || Session["KorisnikIme"] as string == null ||
+    Session["KorisnikId"] as string == "" || Session["KorisnikIme"] as string == "")
 {
     <ul class="nav navbar-nav navbar-right">
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
@@ -9,13 +10,20 @@
 
 else
 {
-    @Html.AntiForgeryToken()
+
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
     <ul class="nav navbar-nav navbar-right">
         <li>
             <a>Hello @Session["KorisnikIme"]! </a>
         </li>
-        <li>@Html.ActionLink("Log off", "LogOff", "Account")</li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <!--
+        <li>()Html.ActionLink("Log off", "LogOff", "Account")</li> -->
     </ul>
+    <!--<input type="submit" value="Log off" class="btn btn-default" /> -->
+    }
 }
 
 <!--

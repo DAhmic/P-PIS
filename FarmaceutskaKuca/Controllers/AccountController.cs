@@ -64,6 +64,13 @@ namespace FarmaceutskaKuca.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            /*if (returnUrl == "/Account/LogOff")
+            {
+                string id = "KorisnikId";
+                Session[id] = "";
+                Session.RemoveAll();
+            }*/
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -161,15 +168,15 @@ namespace FarmaceutskaKuca.Controllers
                 else
                 {
                     ModelState.AddModelError("", "Pogrešan username ili password");
-                    //return View(k);
+                    return View();
                 }
             }
-            return View(k);
         }
 
         //
         // POST: /Account/LogOff
-        [HttpGet]
+        [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
@@ -524,6 +531,7 @@ namespace FarmaceutskaKuca.Controllers
                     return View();
                 }
         */
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
