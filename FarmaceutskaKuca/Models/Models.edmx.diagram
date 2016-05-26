@@ -29,6 +29,9 @@
         <EntityTypeShape EntityType="mydbModel.dostupnost" Width="1.5" PointX="10.625" PointY="9.875" />
         <AssociationConnector Association="mydbModel.dostupnost_ibfk_1" />
         <AssociationConnector Association="mydbModel.dostupnost_ibfk_2" />
+        <EntityTypeShape EntityType="mydbModel.korisnikxxedukacija" Width="1.5" PointX="11.25" PointY="1.375" />
+        <AssociationConnector Association="mydbModel.korisnikxxedukacija_ibfk_2" />
+        <AssociationConnector Association="mydbModel.korisnikxxedukacija_ibfk_1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

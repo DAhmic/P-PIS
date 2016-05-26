@@ -1,4 +1,4 @@
-﻿@model FarmaceutskaKuca.Models.korisnikxedukacija
+﻿@model FarmaceutskaKuca.Models.korisnikxxedukacija
 
 @{
     ViewBag.Title = "Details";
@@ -7,7 +7,7 @@
 <h2>Detalji</h2>
 
 <div>
-    <h4>korisnikxedukacija</h4>
+    <h4></h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -47,18 +47,7 @@
         </dt>
 
         <dd>
-            @if (Model.odobreno == 1)
-            {
-                @Html.DisplayName("Da")
-            }
-            @if (Model.odobreno == 0)
-            {
-                @Html.DisplayName("Ne")
-            }
-            @if (Model.odobreno == null)
-            {
-                @Html.DisplayName("")
-            }
+            @Html.DisplayFor(model => model.odobreno)
         </dd>
 
     </dl>

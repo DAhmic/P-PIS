@@ -36,7 +36,7 @@
             @Html.DisplayName("Napomena") <!-- DisplayNameFor(model => model.korisnik.username) -->
         </th>
         <th>
-            @Html.DisplayName("Rjesenje") <!-- DisplayNameFor(model => model.korisnik.username) -->
+            @Html.DisplayName("Korisnik potvrdio") <!-- DisplayNameFor(model => model.korisnik.username) -->
         </th>
         <th></th>
     </tr>
@@ -89,10 +89,25 @@
                 @Html.DisplayFor(modelItem => item.korisnik.username)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Napomena_M)
+                @if (item.Napomena_K != "Prihvaceno")
+                {
+                    @Html.DisplayFor(modelItem => item.Napomena_M)
+                }
+                @if (item.Napomena_K == "Prihvaceno")
+                {
+                    @Html.DisplayName("/")
+                }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Napomena_K)
+                @if (item.Napomena_K == "Prihvaceno")
+                {
+                    @Html.DisplayName("Da")
+                }
+                @if (item.Napomena_K == "Odbijeno")
+                {
+                    @Html.DisplayName("Ne")
+                }
+                <!--()Html.DisplayFor(modelItem => item.Napomena_K)-->
             </td>
             <td>
                 @Html.ActionLink("Uredi", "Edit", new { id=item.id }) |

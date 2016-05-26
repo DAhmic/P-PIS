@@ -75,6 +75,15 @@
           <Property Name="id_e" Type="int" />
           <Property Name="odobreno" Type="int" />
         </EntityType>
+        <EntityType Name="korisnikxxedukacija">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_k" Type="int" />
+          <Property Name="id_e" Type="int" />
+          <Property Name="odobreno" Type="varchar" MaxLength="5" />
+        </EntityType>
         <EntityType Name="mjesec">
           <Key>
             <PropertyRef Name="id" />
@@ -223,6 +232,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="korisnikxxedukacija_ibfk_1">
+          <End Role="korisnik" Type="Self.korisnik" Multiplicity="0..1" />
+          <End Role="korisnikxxedukacija" Type="Self.korisnikxxedukacija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="korisnik">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="korisnikxxedukacija">
+              <PropertyRef Name="id_k" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="korisnikxxedukacija_ibfk_2">
+          <End Role="edukacija" Type="Self.edukacija" Multiplicity="0..1" />
+          <End Role="korisnikxxedukacija" Type="Self.korisnikxxedukacija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edukacija">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="korisnikxxedukacija">
+              <PropertyRef Name="id_e" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="plan_ibfk_1">
           <End Role="servisxrizik" Type="Self.servisxrizik" Multiplicity="1" />
           <End Role="plan" Type="Self.plan" Multiplicity="*" />
@@ -267,6 +300,7 @@
           <EntitySet Name="kategorija" EntityType="Self.kategorija" Schema="mydb" store:Type="Tables" />
           <EntitySet Name="korisnik" EntityType="Self.korisnik" Schema="mydb" store:Type="Tables" />
           <EntitySet Name="korisnikxedukacija" EntityType="Self.korisnikxedukacija" Schema="mydb" store:Type="Tables" />
+          <EntitySet Name="korisnikxxedukacija" EntityType="Self.korisnikxxedukacija" Schema="mydb" store:Type="Tables" />
           <EntitySet Name="mjesec" EntityType="Self.mjesec" Schema="mydb" store:Type="Tables" />
           <EntitySet Name="plan" EntityType="Self.plan" Schema="mydb" store:Type="Tables" />
           <EntitySet Name="rizik" EntityType="Self.rizik" Schema="mydb" store:Type="Tables" />
@@ -304,6 +338,14 @@
           <AssociationSet Name="id_k" Association="Self.id_k">
             <End Role="korisnik" EntitySet="korisnik" />
             <End Role="korisnikxedukacija" EntitySet="korisnikxedukacija" />
+          </AssociationSet>
+          <AssociationSet Name="korisnikxxedukacija_ibfk_1" Association="Self.korisnikxxedukacija_ibfk_1">
+            <End Role="korisnik" EntitySet="korisnik" />
+            <End Role="korisnikxxedukacija" EntitySet="korisnikxxedukacija" />
+          </AssociationSet>
+          <AssociationSet Name="korisnikxxedukacija_ibfk_2" Association="Self.korisnikxxedukacija_ibfk_2">
+            <End Role="edukacija" EntitySet="edukacija" />
+            <End Role="korisnikxxedukacija" EntitySet="korisnikxxedukacija" />
           </AssociationSet>
           <AssociationSet Name="plan_ibfk_1" Association="Self.plan_ibfk_1">
             <End Role="servisxrizik" EntitySet="servisxrizik" />
@@ -361,6 +403,7 @@
           <NavigationProperty Name="incident" Relationship="Self.fk_Incident_Korisnik1" FromRole="korisnik" ToRole="incident" />
           <NavigationProperty Name="tip" Relationship="Self.fk_Korisnik_Tip" FromRole="korisnik" ToRole="tip" />
           <NavigationProperty Name="korisnikxedukacija" Relationship="mydbModel.id_k" FromRole="korisnik" ToRole="korisnikxedukacija" />
+          <NavigationProperty Name="korisnikxxedukacija" Relationship="mydbModel.korisnikxxedukacija_ibfk_1" FromRole="korisnik" ToRole="korisnikxxedukacija" />
         </EntityType>
         <EntityType Name="tip">
           <Key>
@@ -464,6 +507,15 @@
             <End Role="mjesec" EntitySet="mjesec" />
             <End Role="dostupnost" EntitySet="dostupnost" />
           </AssociationSet>
+          <EntitySet Name="korisnikxxedukacija" EntityType="mydbModel.korisnikxxedukacija" />
+          <AssociationSet Name="korisnikxxedukacija_ibfk_2" Association="mydbModel.korisnikxxedukacija_ibfk_2">
+            <End Role="edukacija" EntitySet="edukacija" />
+            <End Role="korisnikxxedukacija" EntitySet="korisnikxxedukacija" />
+          </AssociationSet>
+          <AssociationSet Name="korisnikxxedukacija_ibfk_1" Association="mydbModel.korisnikxxedukacija_ibfk_1">
+            <End Role="korisnik" EntitySet="korisnik" />
+            <End Role="korisnikxxedukacija" EntitySet="korisnikxxedukacija" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="edukacija">
           <Key>
@@ -475,6 +527,7 @@
           <Property Name="kategorija" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="trajanje" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="korisnikxedukacija" Relationship="mydbModel.id_e" FromRole="edukacija" ToRole="korisnikxedukacija" />
+          <NavigationProperty Name="korisnikxxedukacija" Relationship="mydbModel.korisnikxxedukacija_ibfk_2" FromRole="edukacija" ToRole="korisnikxxedukacija" />
         </EntityType>
         <EntityType Name="korisnikxedukacija">
           <Key>
@@ -657,6 +710,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="korisnikxxedukacija">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_k" Type="Int32" />
+          <Property Name="id_e" Type="Int32" />
+          <Property Name="odobreno" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="edukacija" Relationship="mydbModel.korisnikxxedukacija_ibfk_2" FromRole="korisnikxxedukacija" ToRole="edukacija" />
+          <NavigationProperty Name="korisnik" Relationship="mydbModel.korisnikxxedukacija_ibfk_1" FromRole="korisnikxxedukacija" ToRole="korisnik" />
+        </EntityType>
+        <Association Name="korisnikxxedukacija_ibfk_2">
+          <End Type="mydbModel.edukacija" Role="edukacija" Multiplicity="0..1" />
+          <End Type="mydbModel.korisnikxxedukacija" Role="korisnikxxedukacija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="edukacija">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="korisnikxxedukacija">
+              <PropertyRef Name="id_e" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="korisnikxxedukacija_ibfk_1">
+          <End Type="mydbModel.korisnik" Role="korisnik" Multiplicity="0..1" />
+          <End Type="mydbModel.korisnikxxedukacija" Role="korisnikxxedukacija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="korisnik">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="korisnikxxedukacija">
+              <PropertyRef Name="id_k" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -794,6 +882,16 @@
                 <ScalarProperty Name="procenat" ColumnName="procenat" />
                 <ScalarProperty Name="id_m" ColumnName="id_m" />
                 <ScalarProperty Name="id_s" ColumnName="id_s" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="korisnikxxedukacija">
+            <EntityTypeMapping TypeName="mydbModel.korisnikxxedukacija">
+              <MappingFragment StoreEntitySet="korisnikxxedukacija">
+                <ScalarProperty Name="odobreno" ColumnName="odobreno" />
+                <ScalarProperty Name="id_e" ColumnName="id_e" />
+                <ScalarProperty Name="id_k" ColumnName="id_k" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

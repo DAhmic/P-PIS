@@ -153,9 +153,23 @@ namespace FarmaceutskaKuca.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool testiran = true;
+                if (plan.testiran == "Ne")
+                {
+                    testiran = false;
+                }
+                if (!testiran)
+                {
+                    if (plan.napomena_m == "Da")
+                    {
+                        ModelState.AddModelError(string.Empty, "Plan oporavka nije testiran, ne možete ga odobriti");
+                        ViewBag.id_sxr = new SelectList(db.servisxrizik, "id", "naziv", plan.id_sxr);
+                        return View(plan);
+                    }
+                }
                 db.Entry(plan).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Plan");
             }
             ViewBag.id_sxr = new SelectList(db.servisxrizik, "id", "naziv", plan.id_sxr);
             return View(plan);

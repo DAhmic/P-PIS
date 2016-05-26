@@ -5,6 +5,9 @@
 }
 
 <h2>Edukacije</h2>
+<p>
+   
+</p>
 
 <table class="table">
     <tr>
@@ -40,7 +43,8 @@
             </td>
             <td>
                 @Html.ActionLink("Detalji", "Details", new { id = item.id }) |
-                @Html.ActionLink("Prijavi se", "Prijava", new { id = item.id })
+                @Html.ActionLink("Prijavi se", "CreateK", "KorisnikXXEdukacija")
+                <!--()Html.ActionLink("Prijavi se", "Prijava", new { id = item.id }) -->
             </td>
         </tr>
     }

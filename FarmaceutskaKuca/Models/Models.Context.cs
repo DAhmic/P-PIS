@@ -38,5 +38,6 @@ namespace FarmaceutskaKuca.Models
         public virtual DbSet<servisxrizik> servisxrizik { get; set; }
         public virtual DbSet<mjesec> mjesec { get; set; }
         public virtual DbSet<dostupnost> dostupnost { get; set; }
+        public virtual DbSet<korisnikxxedukacija> korisnikxxedukacija { get; set; }
     }
 }

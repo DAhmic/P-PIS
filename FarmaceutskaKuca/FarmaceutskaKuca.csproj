@@ -208,12 +208,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\DostupnostController.cs" />
+    <Compile Include="Controllers\KorisnikXXEdukacijaController.cs" />
     <Compile Include="Controllers\MjesecController.cs" />
     <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Controllers\RizikController.cs" />
     <Compile Include="Controllers\ServisController.cs" />
     <Compile Include="Controllers\ServisXRizikController.cs" />
     <Compile Include="Models\dostupnost.cs">
+      <DependentUpon>Models.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\korisnikxxedukacija.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\mjesec.cs">
@@ -442,6 +446,13 @@
     <Content Include="Views\Home\IndexKM.cshtml" />
     <Content Include="Views\Home\IndexITSCM.cshtml" />
     <Content Include="Views\Account\LogOff.cshtml" />
+    <Content Include="Views\KorisnikXEdukacija\CreateK.cshtml" />
+    <Content Include="Views\KorisnikXXEdukacija\Create.cshtml" />
+    <Content Include="Views\KorisnikXXEdukacija\Delete.cshtml" />
+    <Content Include="Views\KorisnikXXEdukacija\Details.cshtml" />
+    <Content Include="Views\KorisnikXXEdukacija\Edit.cshtml" />
+    <Content Include="Views\KorisnikXXEdukacija\Index.cshtml" />
+    <Content Include="Views\KorisnikXXEdukacija\CreateK.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

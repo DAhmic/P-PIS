@@ -1,0 +1,58 @@
+﻿@model IEnumerable<FarmaceutskaKuca.Models.korisnikxxedukacija>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Zahtjevi za edukacijom</h2>
+
+<p>
+    @Html.ActionLink("Kreiraj novi", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Ime")
+        </th>
+        <th>
+            @Html.DisplayName("Prezime")
+        </th>
+        <th>
+            @Html.DisplayName("Username korisnika")
+        </th>
+        <th>
+            @Html.DisplayName("Naziv edukacije")
+        </th>
+        <th>
+            @Html.DisplayName("Odobreno")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.korisnik.ime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.korisnik.prezime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.korisnik.username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.edukacija.naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.odobreno)
+            </td>
+            <td>
+                @Html.ActionLink("Uredi", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Detalji", "Details", new { id = item.id }) |
+                @Html.ActionLink("Izbriši", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>

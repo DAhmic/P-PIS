@@ -55,7 +55,14 @@
                 @Html.DisplayFor(modelItem => item.testiran)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.napomena_k)
+                @if (item.napomena_m != "Da")
+                {
+                    @Html.DisplayFor(modelItem => item.napomena_k)
+                }
+                @if (item.napomena_m == "Da")
+                {
+                    @Html.DisplayName("/")
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.napomena_m)

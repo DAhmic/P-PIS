@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Zahtjevi za edukacijom</h2>
 
 <p>
     @Html.ActionLink("Kreiraj novi", "Create")
@@ -12,7 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayName("Korisnik")
+            @Html.DisplayName("Ime")
+        </th>
+        <th>
+            @Html.DisplayName("Prezime")
+        </th>
+        <th>
+            @Html.DisplayName("Username korisnika")
         </th>
         <th>
             @Html.DisplayName("Naziv edukacije")
@@ -25,6 +31,12 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.korisnik.ime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.korisnik.prezime)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.korisnik.username)
         </td>

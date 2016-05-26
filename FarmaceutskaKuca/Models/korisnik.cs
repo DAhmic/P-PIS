@@ -19,6 +19,7 @@ namespace FarmaceutskaKuca.Models
         {
             this.incident = new HashSet<incident>();
             this.korisnikxedukacija = new HashSet<korisnikxedukacija>();
+            this.korisnikxxedukacija = new HashSet<korisnikxxedukacija>();
         }
     
         public int id { get; set; }
@@ -33,5 +34,7 @@ namespace FarmaceutskaKuca.Models
         public virtual tip tip { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<korisnikxedukacija> korisnikxedukacija { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<korisnikxxedukacija> korisnikxxedukacija { get; set; }
     }
 }

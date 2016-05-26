@@ -18,6 +18,7 @@ namespace FarmaceutskaKuca.Controllers
         public ActionResult Index()
         {
             var incident = db.incident.Include(i => i.kategorija).Include(i => i.korisnik);
+            incident = incident.OrderBy(i => i.vrijemePrijave);
             return View(incident.ToList());
         }
 
@@ -25,6 +26,7 @@ namespace FarmaceutskaKuca.Controllers
         public ActionResult IndexIM()
         {
             var incident = db.incident.Include(i => i.kategorija).Include(i => i.korisnik);
+            incident = incident.OrderBy(i => i.vrijemePrijave);
             return View(incident.ToList());
         }
 
@@ -32,6 +34,7 @@ namespace FarmaceutskaKuca.Controllers
         public ActionResult IndexK()
         {
             var incident = db.incident.Include(i => i.kategorija).Include(i => i.korisnik);
+            incident = incident.OrderBy(i => i.vrijemePrijave);
             return View(incident.ToList());
         }
 
@@ -39,6 +42,7 @@ namespace FarmaceutskaKuca.Controllers
         public ActionResult IndexKO()
         {
             var incident = db.incident.Include(i => i.kategorija).Include(i => i.korisnik);
+            incident = incident.OrderBy(i => i.vrijemePrijave);
             return View(incident.ToList());
         }
 
@@ -128,8 +132,8 @@ namespace FarmaceutskaKuca.Controllers
 
             if (ModelState.IsValid)
             {
-                //incident.Korisnik_id = Convert.ToInt32(Session["KorisnikId"]);
-                incident.Korisnik_id = 1;
+                incident.Korisnik_id = Convert.ToInt32(Session["KorisnikId"]);
+                //incident.Korisnik_id = 1;
                 incident.vrijemePrijave = DateTime.Now;
                 incident.prioritet = "";
                 incident.status = "Otvoren";
@@ -137,7 +141,36 @@ namespace FarmaceutskaKuca.Controllers
                 incident.Napomena_K = "";
                 db.incident.Add(incident);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexK", "Incident");
+                //return RedirectToAction("Index");
+            }
+
+            ViewBag.Kategorija_id = new SelectList(db.kategorija, "id", "naziv", incident.Kategorija_id);
+            ViewBag.Korisnik_id = new SelectList(db.korisnik, "id", "username", incident.Korisnik_id);
+            return View(incident);
+        }
+
+        // POST: Incident/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateIM([Bind(Include = "vrijemePrijave,naziv,opis,Kategorija_id,prioritet,status,Napomena_M,Napomena_K")] incident incident)
+        {
+
+            if (ModelState.IsValid)
+            {
+                incident.Korisnik_id = Convert.ToInt32(Session["KorisnikId"]);
+                //incident.Korisnik_id = 1;
+                incident.vrijemePrijave = DateTime.Now;
+                incident.prioritet = "";
+                incident.status = "Otvoren";
+                incident.Napomena_M = "";
+                incident.Napomena_K = "";
+                db.incident.Add(incident);
+                db.SaveChanges();
+                return RedirectToAction("IndexIM", "Incident");
+                //return RedirectToAction("Index");
             }
 
             ViewBag.Kategorija_id = new SelectList(db.kategorija, "id", "naziv", incident.Kategorija_id);
@@ -188,9 +221,24 @@ namespace FarmaceutskaKuca.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool odbijeno = false;
+                if (incident.Napomena_K == "Odbijeno") {
+                    odbijeno = true;                    
+                }
+                if (odbijeno)
+                {
+                    if (incident.status == "Zatvoren")
+                    {
+                        ModelState.AddModelError(string.Empty, "Korisnik nije odobrio rješenje incidenta");
+                        ViewBag.Kategorija_id = new SelectList(db.kategorija, "id", "naziv", incident.Kategorija_id);
+                        //ViewBag.Korisnik_id = new SelectList(db.korisnik, "id", "username", incident.Korisnik_id);
+                        return View(incident);
+                    }
+                }
                 db.Entry(incident).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexIM", "Incident");
+                //return RedirectToAction("Index");
             }
             ViewBag.Kategorija_id = new SelectList(db.kategorija, "id", "naziv", incident.Kategorija_id);
             ViewBag.Korisnik_id = new SelectList(db.korisnik, "id", "username", incident.Korisnik_id);
@@ -208,7 +256,8 @@ namespace FarmaceutskaKuca.Controllers
             {
                 db.Entry(incident).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexK", "Incident");
+                //return RedirectToAction("Index");
             }
             ViewBag.Kategorija_id = new SelectList(db.kategorija, "id", "naziv", incident.Kategorija_id);
             ViewBag.Korisnik_id = new SelectList(db.korisnik, "id", "username", incident.Korisnik_id);

@@ -21,7 +21,31 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if (Session["KorisnikIme"] as string == "Dina")
+                    {
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    }
+                    @if (Session["KorisnikIme"] as string == "Amina")
+                    {
+                        <li>@Html.ActionLink("Home", "IndexIM", "Home")</li>
+                    }
+                    @if (Session["KorisnikIme"] as string == "Ilma")
+                    {
+                        <li>@Html.ActionLink("Home", "IndexKM", "Home")</li>
+                    }
+                    @if (Session["KorisnikIme"] as string == "Azra")
+                    {
+                        <li>@Html.ActionLink("Home", "IndexITSCM", "Home")</li>
+                    }
+                    @if (Session["KorisnikIme"] as string == "Denis")
+                    {
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    }
+                    @if (Session["KorisnikIme"] as string == null || Session["KorisnikIme"] as string == null ||
+                                                Session["KorisnikId"] as string == "" || Session["KorisnikIme"] as string == "")
+                    {
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    }
                     <li>@Html.ActionLink("O nama", "About", "Home")</li>
                     <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
                 </ul>

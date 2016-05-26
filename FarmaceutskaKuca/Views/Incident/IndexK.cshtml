@@ -85,13 +85,20 @@
             </td>
                 -->
             <td>
-                @Html.DisplayFor(modelItem => item.Napomena_M)
+                @if (item.Napomena_K != "Prihvaceno")
+                {
+                    @Html.DisplayFor(modelItem => item.Napomena_M)
+                }
+                @if (item.Napomena_K == "Prihvaceno")
+                {
+                    @Html.DisplayName("/")
+                }
             </td>
             <td>
                 <!-- (at)Html.ActionLink("Uredi", "Edit", new { id=item.id }) -->
                 @if (item.Napomena_M != "/" && item.Napomena_M != "" && item.Napomena_M != null)
                 {
-                    @Html.ActionLink("Potvrdi/Odbij", "EditK", new { id = item.id })
+                    @Html.ActionLink("Prihvati/Odbij", "EditK", new { id = item.id })
                 }
                 @Html.ActionLink("Detalji", "Details", new { id = item.id })
                 <!-- (at)Html.ActionLink("Izbriši", "Delete", new { id=item.id }) -->

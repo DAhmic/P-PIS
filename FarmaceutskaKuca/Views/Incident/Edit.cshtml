@@ -106,13 +106,13 @@
             </div>
         </div>
 
+        @Html.HiddenFor(model => model.Napomena_K)
         <div class="form-group">
-            @Html.Label("Rjesenje", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Napomena_K, "Korisnik potvrdio", htmlAttributes: new { @class = "control-label col-md-2" })
             <!-- LabelFor(model => model.status, htmlAttributes: new { (monkey)class = "control-label col-md-2" }) -->
             <div class="col-md-10">
                 <!--Html.EditorFor(model => model.Napomena_M, new { htmlAttributes = new { (at)class = "form-control" } }) -->
                 @Html.DisplayFor(model => model.Napomena_K)
-                @Html.ValidationMessageFor(model => model.Napomena_K, "", new { @class = "text-danger" })
             </div>
         </div>
 
